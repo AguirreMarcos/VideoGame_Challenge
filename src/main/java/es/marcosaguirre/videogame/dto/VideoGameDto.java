@@ -12,11 +12,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import es.marcosaguirre.videogame.common.GameTypes;
 import es.marcosaguirre.videogame.model.Customer;
 import es.marcosaguirre.videogame.validators.EnumNamePattern;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
+@AllArgsConstructor
 public class VideoGameDto {
 
 
