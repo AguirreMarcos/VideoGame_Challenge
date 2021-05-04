@@ -18,3 +18,13 @@ El sistema permite también la devolución de los juegos alquilados y se encarga
 Se ha añadido la posibilidad de consultar el importe y los puntos a nivel informativo sin persistir los datos, y otra ruta en la que se añade el identificador del cliente para persistir la operación, actualizando el listado de juegos alquilados por el usuario, las fechas de alquiler y devolución de cada uno de ellos, y la generación de un registro en una tabla de operaciones donde se incluye el importe, la fecha, el tipo de operación (alquiler o devolución) y la fecha de la misma.
 
 En el caso de la devolución existen cuatro endpoints, ya que se permite igualmente consultar el importe o confirmar la operativa tanto de parte de los juegos alquilados como del total de los mismos. 
+
+## EndPoints
+
+### Customers
+GET /customers : Devuelve el listado de clientes
+POST /customers : Crea un nuevo cliente (Paso de parametros en el cuerpo, detalles de la entrada y salida de datos en SWAGGER)
+GET /customers/{id} : Devuelve el cliente con el id de la URL
+PUT /customers/{id} : Actualiza el cliente (Paso de parametros en el cuerpo, detalles de la entrada y salida de datos en SWAGGER)
+DELETE /customers/{id} : Elimina el cliente
+
