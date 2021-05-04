@@ -12,11 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import es.marcosaguirre.videogame.common.OperationTypes;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "operations")
 public class Operation {

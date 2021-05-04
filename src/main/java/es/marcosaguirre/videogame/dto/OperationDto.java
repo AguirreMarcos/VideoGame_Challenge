@@ -30,4 +30,6 @@ public class OperationDto {
 		this.date = date;
 	}
 	
+	
+	
 }
