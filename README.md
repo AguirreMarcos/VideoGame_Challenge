@@ -52,7 +52,7 @@ POST /rentals/{id}/confirm : Esta ruta recibe la misma entrada que la anterior p
 
 ### Returns
 **Operaciones de devolución de juegos**
-En esta ruta se realizan las operaciones de devolución
+En esta ruta se realizan las operaciones de devolución <br>
 POST /returns/partial/{id} : En esta ruta se informa de la devolución pero sin persistir la información. Se pasan en el cuerpo de la función los juegos que se quiere devolver de entre los que el cliente tiene alquilados. <br>
 POST /returns/partial/{id}/confirm : Esta ruta es análoga a la anterior pero confirma la devolución y actualiza los estados de los juegos, del cliente y genera un registro en la tabla de operaciones. <br>
 POST /returns/total/{id} : En esta ruta se informa de la devolución pero sin persistir la información. No recibe datos en el cuerpo ya que se asume que se usa esta ruta cuando el cliente quiere realizar la devolución completa. <br>
