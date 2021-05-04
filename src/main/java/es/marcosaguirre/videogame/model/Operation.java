@@ -32,7 +32,7 @@ public class Operation {
 	private Long customerId;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name = "operation_type", nullable = false, length = 70)
+	@Column(name = "operation_type", nullable = false)
 	private OperationTypes operationType;
 	
 	@Column(name = "total_amount", nullable = false, columnDefinition =  "Double default 0.0")

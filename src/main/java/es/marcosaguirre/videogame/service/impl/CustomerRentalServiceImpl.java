@@ -66,7 +66,7 @@ public class CustomerRentalServiceImpl implements ICustomerRentalService {
 		return response;
 	}
 	
-	protected RentalInfoResponseDto getResults(RentalInputDto inputDto) throws BaseException {
+	private RentalInfoResponseDto getResults(RentalInputDto inputDto) throws BaseException {
 		List<VideoGameDto> listOfGames = new ArrayList<>();
 		Integer loyaltyPoints = 0;
 		Double totalPrice = 0.0;

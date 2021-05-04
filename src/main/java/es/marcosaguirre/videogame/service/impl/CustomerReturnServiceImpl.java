@@ -98,7 +98,28 @@ public class CustomerReturnServiceImpl implements ICustomerReturnService {
 		return response;
 	}
 
-	protected ReturnInfoResponseDto getResults(ReturnInputDto inputDto, Long id) throws BaseException {
+	private Double totalReturnCalculator(Double totalRecharge, VideoGameDto game) {
+		if (game.getEndRentalDate().isBefore(LocalDate.now())) {
+			Integer period = Period.between(game.getEndRentalDate(), LocalDate.now()).getDays();
+			switch (game.getTypeOfGame()) {
+			case CLASSIC:
+				totalRecharge += Prices.REGULAR * period;
+				break;
+			case NEW_RELEASE:
+				totalRecharge += Prices.PREMIUM * period;
+				break;
+			case STANDARD:
+				totalRecharge += Prices.REGULAR * period;
+				break;
+			default:
+				break;
+			}
+			
+		}
+		return totalRecharge;
+	}
+	
+	private ReturnInfoResponseDto getResults(ReturnInputDto inputDto, Long id) throws BaseException {
 		CustomerDto customerDto = customerService.getById(id);
 		Double totalRecharge = 0.0;
 		List<VideoGameDto> listOfGamesDto = new ArrayList<>();
@@ -116,23 +137,7 @@ public class CustomerReturnServiceImpl implements ICustomerReturnService {
 						Constants.MSJ_GAME_NOT_RENTED, "game identifier: " + Long.toString(game.getId()));
 				throw exception;
 			}
-			if (game.getEndRentalDate().isBefore(LocalDate.now())) {
-				Integer period = Period.between(game.getEndRentalDate(), LocalDate.now()).getDays();
-				switch (game.getTypeOfGame()) {
-				case CLASSIC:
-					totalRecharge += Prices.REGULAR * period;
-					break;
-				case NEW_RELEASE:
-					totalRecharge += Prices.PREMIUM * period;
-					break;
-				case STANDARD:
-					totalRecharge += Prices.REGULAR * period;
-					break;
-				default:
-					break;
-				}
-
-			}
+			totalRecharge = totalReturnCalculator(totalRecharge, game);
 
 			listOfGamesDto.add(game);
 		}
@@ -142,7 +147,8 @@ public class CustomerReturnServiceImpl implements ICustomerReturnService {
 		return response;
 	}
 
-	protected ReturnInfoResponseDto getResults(Long id) throws BaseException {
+
+	private ReturnInfoResponseDto getResults(Long id) throws BaseException {
 		CustomerDto customerDto = customerService.getById(id);
 		Double totalRecharge = 0.0;
 		List<VideoGameDto> listOfGamesDto = new ArrayList<>();
@@ -154,23 +160,7 @@ public class CustomerReturnServiceImpl implements ICustomerReturnService {
 		}
 		for (VideoGameDto game : VideoGameMapper.toVideoGameDto(customerDto.getRentedGames())) {
 
-			if (game.getEndRentalDate().isBefore(LocalDate.now())) {
-				Integer period = Period.between(game.getEndRentalDate(), LocalDate.now()).getDays();
-				switch (game.getTypeOfGame()) {
-				case CLASSIC:
-					totalRecharge += Prices.REGULAR * period;
-					break;
-				case NEW_RELEASE:
-					totalRecharge += Prices.PREMIUM * period;
-					break;
-				case STANDARD:
-					totalRecharge += Prices.REGULAR * period;
-					break;
-				default:
-					break;
-				}
-
-			}
+			totalRecharge = totalReturnCalculator(totalRecharge, game);
 
 			listOfGamesDto.add(game);
 		}
