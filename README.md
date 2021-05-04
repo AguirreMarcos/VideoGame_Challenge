@@ -20,8 +20,8 @@ Se ha añadido la posibilidad de consultar el importe y los puntos a nivel infor
 En el caso de la devolución existen cuatro endpoints, ya que se permite igualmente consultar el importe o confirmar la operativa tanto de parte de los juegos alquilados como del total de los mismos. 
 
 ## EndPoints
-**Todas las rutas tienen implementado control de errores y validaciones de entrada. Se han implementado mensajes de ayuda y respuestas tanto para operativas exitosas como para los posibles errores. <br>
-**El proyecto está creado usando una base de datos en memoria (H2) y se ha creado un fichero sql que realiza el insert de un cliente y de varios videojuegos de prueba.
+**Todas las rutas tienen implementado control de errores y validaciones de entrada. Se han implementado mensajes de ayuda y respuestas tanto para operativas exitosas como para los posibles errores.** <br>
+**El proyecto está creado usando una base de datos en memoria (H2) y se ha creado un fichero sql que realiza el insert de un cliente y de varios videojuegos de prueba.**
 ### Customers
 **Crud de clientes** <br>
 GET /customers : Devuelve el listado de clientes<br>
