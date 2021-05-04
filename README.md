@@ -6,7 +6,7 @@ Se añade como parte del proyecto la inclusión de swagger para facilitar la con
 
 Para levantar la aplicación simplemente se puede clonar el proyecto y ejecutarlo como Spring Boot Application. La aplicación levanta en local en el puerto por defecto, por lo que la url de la documentación de swagger es <a href="http://localhost:8080/swagger-ui.html" target="_blank">http://localhost:8080/swagger-ui.html</a>
 
-
+Se han realizado tests en todas las capas usando Junit y Mockito y tests que comprueban desde el controlador hasta la capa de datos recorriendo y comprobando así el flujo de datos de la aplicación.
 
 ## Descripción: 
 Se trata de una api Restful que sirve para administrar un sistema de alquiler de videojuegos.
