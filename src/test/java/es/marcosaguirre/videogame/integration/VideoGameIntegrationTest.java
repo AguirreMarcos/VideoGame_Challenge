@@ -84,6 +84,8 @@ public class VideoGameIntegrationTest {
 		String name = JsonPath.read(mvcResult.getResponse().getContentAsString(), "$.data.name");
 
 		assertThat(name.equals(updatedVideoGame.getName()));
+		
+		gameService.delete(createdVideoGame.getId());
 
 	}
 

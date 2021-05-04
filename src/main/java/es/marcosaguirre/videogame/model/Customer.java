@@ -14,10 +14,14 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "customers")
 public class Customer {
 
@@ -34,10 +38,18 @@ public class Customer {
 	@Column(name = "mail", length = 60, nullable = false, unique = true)
 	private String mail;
 	
-	@Column(name = "loyalty_points", nullable = false, columnDefinition = "Integer default 0")
+	@Column(name = "loyalty_points", columnDefinition = "Integer default 0")
 	private Integer loyaltyPoints;
 	
 	@OneToMany(mappedBy = "customer", cascade = { CascadeType.ALL },fetch = FetchType.EAGER)
 	@JsonManagedReference
 	private List<VideoGame> rentedGames;
+
+	public Customer(String name, String lastName, String mail) {
+		this.name = name;
+		this.lastName = lastName;
+		this.mail = mail;
+	}
+	
+	
 }

@@ -24,6 +24,7 @@ public class Constants {
 	
 	public static final String ONLY_CHARACTERS_REGEX_STRING = "^[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+(\\s*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]*)*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+$";
 	public static final String CHARACTERS_31_STRING= "abcdefghijABCDEFGHIJabcdefghijA";
+	public static final String CHARACTERS_51_STRING = "abcdefghijABCDEFGHIJabcdefghijabcdefghijABCDEFGHIJa";
 	public static final String CHARACTERS_61_STRING = "abcdefghijABCDEFGHIJabcdefghijabcdefghijABCDEFGHIJabcdefghijA";
 	public static final String CHARACTERS_71_STRING = "abcdefghijABCDEFGHIJabcdefghijabcdefghijABCDEFGHIJabcdefghijABCDEFGHIJa";
 	public static final String CHARACTERS_61_MAIL_STRING = "abcdefghijABCDEFGHIJabcdefghijabcdefg@hijABCDEFGHIJabcdefghijA.com";

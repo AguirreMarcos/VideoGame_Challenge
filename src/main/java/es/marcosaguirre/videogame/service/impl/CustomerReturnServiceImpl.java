@@ -3,6 +3,7 @@ package es.marcosaguirre.videogame.service.impl;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,11 @@ import es.marcosaguirre.videogame.common.OperationTypes;
 import es.marcosaguirre.videogame.common.Prices;
 import es.marcosaguirre.videogame.dto.ConfirmedReturnResponseDto;
 import es.marcosaguirre.videogame.dto.CustomerDto;
+import es.marcosaguirre.videogame.dto.OperationDto;
 import es.marcosaguirre.videogame.dto.ReturnInfoResponseDto;
 import es.marcosaguirre.videogame.dto.ReturnInputDto;
 import es.marcosaguirre.videogame.dto.VideoGameDto;
 import es.marcosaguirre.videogame.dto.mapper.VideoGameMapper;
-import es.marcosaguirre.videogame.model.Operation;
 import es.marcosaguirre.videogame.service.ICustomerReturnService;
 import es.marcosaguirre.videogame.service.ICustomerService;
 import es.marcosaguirre.videogame.service.IOperationService;
@@ -66,7 +67,7 @@ public class CustomerReturnServiceImpl implements ICustomerReturnService {
 		}
 		customer.setRentedGames(VideoGameMapper.toVideoGameEntity(remainingGames));
 		customerService.update(customer, customer.getId());
-		operationService.register(new Operation(customer.getId(), OperationTypes.RETURN, results.getTotalRecharge(), LocalDate.now()));
+		operationService.register(new OperationDto(customer.getId(), OperationTypes.RETURN, results.getTotalRecharge(), LocalDate.now()));
 		ConfirmedReturnResponseDto response = new ConfirmedReturnResponseDto();
 		response.setTotalRecharge(results.getTotalRecharge());
 		response.setCustomer(customer);
@@ -87,9 +88,9 @@ public class CustomerReturnServiceImpl implements ICustomerReturnService {
 			gameService.update(game, game.getId());
 			returnedGames.add(game);
 		}
-		customer.setRentedGames(null);
+		customer.setRentedGames(Collections.emptyList());
 		customerService.update(customer, customer.getId());
-		operationService.register(new Operation(customer.getId(), OperationTypes.RETURN, results.getTotalRecharge(), LocalDate.now()));
+		operationService.register(new OperationDto(customer.getId(), OperationTypes.RETURN, results.getTotalRecharge(), LocalDate.now()));
 		ConfirmedReturnResponseDto response = new ConfirmedReturnResponseDto();
 		response.setCustomer(customer);
 		response.setReturnedGames(returnedGames);

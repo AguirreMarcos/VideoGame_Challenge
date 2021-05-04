@@ -49,7 +49,6 @@ public class CustomerRentalControllerTest {
 	public void showRentalInfoReponseTest() throws JsonProcessingException, Exception {
 
 		// input
-
 		List<Long> gameIdentifiers = new ArrayList<>();
 		gameIdentifiers.add(1L);
 		gameIdentifiers.add(2L);

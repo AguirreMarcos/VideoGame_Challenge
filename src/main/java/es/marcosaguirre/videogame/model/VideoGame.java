@@ -17,10 +17,14 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import es.marcosaguirre.videogame.common.GameTypes;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "inventory")
 public class VideoGame {
 	
@@ -48,6 +52,12 @@ public class VideoGame {
 	@JoinColumn(name = "user_id", nullable = true, foreignKey = @ForeignKey(name = "FK_videogame_user"))
 	@JsonBackReference
 	private Customer customer;
+
+	public VideoGame(Long id, String name, GameTypes typeOfGame) {
+		this.id = id;
+		this.name = name;
+		this.typeOfGame = typeOfGame;
+	}
 
 	
 }

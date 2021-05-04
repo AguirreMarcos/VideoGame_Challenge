@@ -24,10 +24,10 @@ public class OperationServiceImpl implements IOperationService{
 	private IOperationRepo operationRepo;
 
 	@Override
-	public Operation register(Operation operation) throws BaseException {
+	public OperationDto register(OperationDto operation) throws BaseException {
 		Operation newOperation = null;
 		try {
-			newOperation = operationRepo.save(operation);
+			newOperation = operationRepo.save(OperationMapper.toOperationEntity(operation));
 		}catch (DataIntegrityViolationException dve) {
 			log.error(dve.getMessage());
 			BaseException e = new BaseException(Constants.ERROR_CODE_DAO, Constants.MSJ_SERVER_ERROR);
@@ -37,7 +37,7 @@ public class OperationServiceImpl implements IOperationService{
 			BaseException ex = new BaseException(Constants.ERROR_CODE_SERVER, Constants.MSJ_SERVER_ERROR);
 			throw ex;
 		}
-		return newOperation;
+		return OperationMapper.toOperationDto(newOperation);
 	}
 
 	@Override
@@ -55,6 +55,19 @@ public class OperationServiceImpl implements IOperationService{
 			throw exception;
 		}
 		return OperationMapper.toOperationDto(operation.get());
+	}
+	
+	@Override
+	public boolean delete(Long id) throws BaseException {
+		Optional<Operation> operation = operationRepo.findById(id);
+		if (!operation.isPresent()) {
+			log.warn("Operation with id " + id + "doesn't exists");
+			BaseException exception = new BaseException(Constants.ERROR_CODE_ELEMENT_NOT_FOUND,
+					Constants.MSJ_ENTRY_DOES_NOT_EXISTS, Long.toString(id));
+			throw exception;
+		}
+		operationRepo.deleteById(id);
+		return true;
 	}
 
 }

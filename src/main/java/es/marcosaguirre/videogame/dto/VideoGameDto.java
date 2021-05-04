@@ -21,7 +21,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class VideoGameDto {
 
-
 	private Long id;
 
 	@NotBlank(message = "Name can't be empty")
@@ -56,6 +55,19 @@ public class VideoGameDto {
 		this.name = name;
 		this.typeOfGame = typeOfGame;
 	}
+	
+	public VideoGameDto(
+			@NotBlank(message = "Name can't be empty") @Length(max = 70, message = "Name must be under 70 characters") @NotNull String name,
+			@NotNull @EnumNamePattern(regexp = "NEW_RELEASE|STANDARD|CLASSIC", message = "Game type must be either NEW_RELEASE, STANDARD or CLASSIC") GameTypes typeOfGame,
+			boolean available, LocalDate startRentalDate, LocalDate endRentalDate, Customer customer) {
+		this.name = name;
+		this.typeOfGame = typeOfGame;
+		this.available = available;
+		this.startRentalDate = startRentalDate;
+		this.endRentalDate = endRentalDate;
+		this.customer = customer;
+	}
+	
 	
 	
 }
