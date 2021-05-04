@@ -68,7 +68,7 @@ public class CustomerRentalControllerTest {
 
 		Response<RentalInfoResponseDto> response = new Response<>();
 		response.setData(rentalResponse);
-		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RENTAL_INFO));
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RENTAL_INFO, Constants.TYPE_INFO, Constants.MSJ_ORIGIN_RENTAL_INFO));
 
 		Mockito.when(rentalService.showRentalInfo(inputDto)).thenReturn(rentalResponse);
 
@@ -108,7 +108,7 @@ public class CustomerRentalControllerTest {
 
 		Response<ConfirmedRentalResponseDto> response = new Response<>();
 		response.setData(confirmedRentalResponse);
-		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RENTAL_CONFIRMATION));
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RENTAL_CONFIRMATION, Constants.TYPE_INFO, Constants.MSJ_ORIGIN_RENTAL_INFO));
 
 		Mockito.when(rentalService.confirmRentalOperation(inputDto, customer.getId())).thenReturn(confirmedRentalResponse);
 

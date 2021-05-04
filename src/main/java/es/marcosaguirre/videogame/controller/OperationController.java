@@ -33,29 +33,40 @@ public class OperationController {
 		List<OperationDto> operations = new ArrayList<>();
 		operations.addAll(operationService.getAll());
 		Response<List<OperationDto>> response = new Response<>();
+		
 		if(operations.isEmpty()) {
-			response.addMessage(new Message(Constants.MSJ_EMPTY_LIST));
+			response.addMessage(new Message(Constants.ERROR_CODE_ELEMENT_NOT_FOUND, Constants.MSJ_EMPTY_LIST, Constants.TYPE_ERROR, Constants.MSJ_ORIGIN_OPERATIONS));
 			return new ResponseEntity<Response<List<OperationDto>>>(response, HttpStatus.OK);
 		}
+		
 		response.setData(operations);
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_LIST, Constants.TYPE_INFO, Constants.MSJ_ORIGIN_OPERATIONS));
+		
 		return new ResponseEntity<Response<List<OperationDto>>>(response, HttpStatus.OK);
 
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Response<OperationDto>> getOperationById(@PathVariable Long id){
+		
 		OperationDto operationDto = null;
+		
 		try {
 			operationDto = operationService.getById(id);
 		} catch (BaseException e) {
 			log.warn("Operation with id " + id + " doesn't exists");
 		}
+		
 		Response<OperationDto> response = new Response<>();
+		
 		if(operationDto == null) {
-			response.addMessage(new Message(Constants.ERROR_CODE_ELEMENT_NOT_FOUND, Constants.MSJ_ENTRY_DOES_NOT_EXISTS, "Operation with id: " + Long.toString(id) ));
+			response.addMessage(new Message(Constants.ERROR_CODE_ELEMENT_NOT_FOUND, Constants.MSJ_ENTRY_DOES_NOT_EXISTS, Constants.TYPE_ERROR,"Operation with id: " + id));
 			return new ResponseEntity<Response<OperationDto>>(response, HttpStatus.NOT_FOUND);
 		}
+		
 		response.setData(operationDto);
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_FOUNDED, Constants.TYPE_INFO,"Operation with id: " + id));
+		
 		return new ResponseEntity<Response<OperationDto>>(response, HttpStatus.OK);
 	}
 	

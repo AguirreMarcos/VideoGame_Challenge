@@ -90,7 +90,7 @@ public class CustomerReturnControllerTest {
 
 		Response<ReturnInfoResponseDto> response = new Response<>();
 		response.setData(returnInfo);
-		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RETURN_INFO));
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RETURN_INFO, Constants.TYPE_INFO, "Customer with id: " + customer.getId()));
 
 		Mockito.when(returnService.showPartialReturnInfo(inputDto, customer.getId())).thenReturn(returnInfo);
 
@@ -139,7 +139,7 @@ public class CustomerReturnControllerTest {
 
 		Response<ReturnInfoResponseDto> response = new Response<>();
 		response.setData(returnInfo);
-		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RETURN_INFO));
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RETURN_INFO, Constants.TYPE_INFO, "Customer with id: " + customer.getId()));
 
 		Mockito.when(returnService.showTotalReturnInfo(customer.getId())).thenReturn(returnInfo);
 
@@ -203,7 +203,7 @@ public class CustomerReturnControllerTest {
 
 		Response<ConfirmedReturnResponseDto> response = new Response<>();
 		response.setData(returnInfo);
-		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RETURN_INFO));
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RETURN_INFO, Constants.TYPE_INFO, "Customer with id: " + customer.getId()));
 
 		Mockito.when(returnService.confirmPartialReturn(inputDto, customer.getId())).thenReturn(returnInfo);
 
@@ -259,7 +259,7 @@ public class CustomerReturnControllerTest {
 
 		Response<ConfirmedReturnResponseDto> response = new Response<>();
 		response.setData(returnInfo);
-		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RETURN_INFO));
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RETURN_INFO, Constants.TYPE_INFO, "Customer with id: " + customer.getId()));
 
 		Mockito.when(returnService.confirmTotalReturn(customer.getId())).thenReturn(returnInfo);
 

@@ -57,7 +57,5 @@ public class VideoGame {
 		this.id = id;
 		this.name = name;
 		this.typeOfGame = typeOfGame;
-	}
-
-	
+	}	
 }

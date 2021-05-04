@@ -10,7 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RentalInfoResponseDto {
+	
 	private List<VideoGameDto> games;
 	private Integer loyaltyPoints;
 	private Double totalPrice;
+	
 }

@@ -25,7 +25,9 @@ public class CustomerServiceImpl implements ICustomerService {
 
 	@Override
 	public CustomerDto register(CustomerDto obj) throws BaseException {
+		
 		Customer newCustomer = null;
+		
 		try {
 			newCustomer = customerRepo.save(CustomerMapper.toCustomerEntity(obj));
 		} catch (DataIntegrityViolationException dve) {
@@ -37,43 +39,54 @@ public class CustomerServiceImpl implements ICustomerService {
 			BaseException ex = new BaseException(Constants.ERROR_CODE_SERVER, Constants.MSJ_SERVER_ERROR);
 			throw ex;
 		}
+		
 		return CustomerMapper.toCustomerDto(newCustomer);
 	}
 
 	@Override
 	public CustomerDto update(CustomerDto obj,  Long id) throws BaseException {
+		
 		Optional<Customer> customer = customerRepo.findById(id);
+		
 		if (!customer.isPresent()) {
 			log.warn("Customer with id " + obj.getId() + "doesn't exists");
 			BaseException exception = new BaseException(Constants.ERROR_CODE_ELEMENT_NOT_FOUND,
 					Constants.MSJ_ENTRY_DOES_NOT_EXISTS, Long.toString(obj.getId()));
 			throw exception;
 		}
+		
 		obj.setId(id);
 		Customer updatedCustomer = customerRepo.save(CustomerMapper.toCustomerEntity(obj));
+		
 		return CustomerMapper.toCustomerDto(updatedCustomer);
 	}
 
 	@Override
 	public List<CustomerDto> getAll() throws BaseException {
+		
 		return CustomerMapper.toCustomerDto(customerRepo.findAll());
 	}
 
 	@Override
 	public CustomerDto getById(Long id) throws BaseException {
+		
 		Optional<Customer> customer = customerRepo.findById(id);
+		
 		if (!customer.isPresent()) {
 			log.warn("Customer with id " + id + "doesn't exists");
 			BaseException exception = new BaseException(Constants.ERROR_CODE_ELEMENT_NOT_FOUND,
 					Constants.MSJ_ENTRY_DOES_NOT_EXISTS, Long.toString(id));
 			throw exception;
 		}
+		
 		return CustomerMapper.toCustomerDto(customer.get());
 	}
 
 	@Override
 	public boolean delete(Long id) throws BaseException {
+		
 		Optional<Customer> customer = customerRepo.findById(id);
+		
 		if (!customer.isPresent()) {
 			log.warn("Customer with id " + id + "doesn't exists");
 			BaseException exception = new BaseException(Constants.ERROR_CODE_ELEMENT_NOT_FOUND,
@@ -81,6 +94,7 @@ public class CustomerServiceImpl implements ICustomerService {
 			throw exception;
 		}
 		customerRepo.deleteById(id);
+		
 		return true;
 	}
 

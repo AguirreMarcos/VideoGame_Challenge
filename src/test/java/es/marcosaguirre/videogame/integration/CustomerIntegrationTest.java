@@ -97,7 +97,7 @@ public class CustomerIntegrationTest {
 
 		Response<Void> response = new Response<>();
 		response.addMessage(
-				new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_DELETED, Long.toString(createdCustomer.getId())));
+				new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_DELETED, Constants.TYPE_INFO, "Customer with id: " + createdCustomer.getId()));
 
 		mockMvc.perform(delete(url)).andExpect(status().isCreated())
 				.andExpect(content().string(objectMapper.writeValueAsString(response))).andDo(print());
@@ -139,6 +139,8 @@ public class CustomerIntegrationTest {
 		Response<List<CustomerDto>> expectedResponse = new Response<>();
 
 		expectedResponse.setData(responseList);
+		
+		expectedResponse.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_LIST, Constants.TYPE_INFO, "Customers List"));
 
 		String expectedJsonResponse = objectMapper.writeValueAsString(expectedResponse);
 
@@ -161,7 +163,7 @@ public class CustomerIntegrationTest {
 
 		response.setData(listOfCustomers);
 
-		response.addMessage(new Message(Constants.MSJ_EMPTY_LIST));
+		response.addMessage(new Message(Constants.ERROR_CODE_ELEMENT_NOT_FOUND,Constants.MSJ_EMPTY_LIST, Constants.TYPE_ERROR, "Customers List"));
 
 		String url = "/customers";
 

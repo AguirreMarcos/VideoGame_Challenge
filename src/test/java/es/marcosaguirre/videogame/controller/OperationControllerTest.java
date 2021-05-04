@@ -19,6 +19,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import es.marcosaguirre.videogame.common.Constants;
+import es.marcosaguirre.videogame.common.Message;
 import es.marcosaguirre.videogame.common.OperationTypes;
 import es.marcosaguirre.videogame.common.Response;
 import es.marcosaguirre.videogame.dto.OperationDto;
@@ -55,6 +57,7 @@ public class OperationControllerTest {
 		
 		Response<List<OperationDto>> response = new Response<>();
 		response.setData(operationsList);
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_LIST, Constants.TYPE_INFO, Constants.MSJ_ORIGIN_OPERATIONS));
 		
 		Mockito.when(operationService.getAll()).thenReturn(operationsList);
 		
@@ -78,6 +81,7 @@ public class OperationControllerTest {
 		
 		Response<OperationDto> response = new Response<>();
 		response.setData(operation);
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_FOUNDED, Constants.TYPE_INFO,"Operation with id: " + customerId));
 		
 		Mockito.when(operationService.getById(operationId)).thenReturn(operation);
 		

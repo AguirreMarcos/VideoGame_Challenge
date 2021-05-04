@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ConfirmedRentalResponseDto {
+	
 	private Double totalPayment;
 	private CustomerDto customer;
+	
 }

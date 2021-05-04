@@ -29,11 +29,13 @@ public class CustomerReturnController {
 	
 	@PostMapping("/partial/{id}")
 	public ResponseEntity<Response<ReturnInfoResponseDto>> showPartialReturnInfoResponse(@Valid @RequestBody ReturnInputDto inputDto, @PathVariable Long id){
+		
 		Response<ReturnInfoResponseDto> response = new Response<>();
 		HttpStatus status = null;
+		
 		try {
 			response.setData(returnService.showPartialReturnInfo(inputDto, id));
-			response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RETURN_INFO));
+			response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RETURN_INFO, Constants.TYPE_INFO, "Customer with id: " + id));
 			status = HttpStatus.OK;
 		} catch (BaseException e) {
 			response.addMessage(new Message(e.getCode(), e.getMessage(), "Error", e.getOrigin()));
@@ -45,11 +47,13 @@ public class CustomerReturnController {
 	
 	@PostMapping("/total/{id}")
 	public ResponseEntity<Response<ReturnInfoResponseDto>> showTotalReturnInfoResponse(@PathVariable Long id){
+		
 		Response<ReturnInfoResponseDto> response = new Response<>();
 		HttpStatus status = null;
+		
 		try {
 			response.setData(returnService.showTotalReturnInfo(id));
-			response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RETURN_INFO));
+			response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RETURN_INFO, Constants.TYPE_INFO, "Customer with id: " + id));
 			status = HttpStatus.OK;
 		} catch (BaseException e) {
 			response.addMessage(new Message(e.getCode(), e.getMessage(), "Error", e.getOrigin()));
@@ -61,11 +65,13 @@ public class CustomerReturnController {
 	
 	@PostMapping("/partial/{id}/confirm")
 	public ResponseEntity<Response<ConfirmedReturnResponseDto>> confirmPartialReturnResponse(@Valid @RequestBody ReturnInputDto inputDto, @PathVariable Long id){
+		
 		Response<ConfirmedReturnResponseDto> response = new Response<>();
 		HttpStatus status = null;
+		
 		try {
 			response.setData(returnService.confirmPartialReturn(inputDto, id));
-			response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RETURN_INFO));
+			response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RETURN_INFO, Constants.TYPE_INFO, "Customer with id: " + id));
 			status = HttpStatus.OK;
 		} catch (BaseException e) {
 			response.addMessage(new Message(e.getCode(), e.getMessage(), "Error", e.getOrigin()));
@@ -73,15 +79,18 @@ public class CustomerReturnController {
 		}
 		
 		return new ResponseEntity<Response<ConfirmedReturnResponseDto>> (response, status);
+		
 	}
 	
 	@PostMapping("/total/{id}/confirm")
 	public ResponseEntity<Response<ConfirmedReturnResponseDto>> confirmTotalReturnResponse(@PathVariable Long id){
+		
 		Response<ConfirmedReturnResponseDto> response = new Response<>();
 		HttpStatus status = null;
+		
 		try {
 			response.setData(returnService.confirmTotalReturn(id));
-			response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RETURN_INFO));
+			response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RETURN_INFO, Constants.TYPE_INFO, "Customer with id: " + id));
 			status = HttpStatus.OK;
 		} catch (BaseException e) {
 			response.addMessage(new Message(e.getCode(), e.getMessage(), "Error", e.getOrigin()));

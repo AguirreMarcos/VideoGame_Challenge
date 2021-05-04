@@ -37,96 +37,125 @@ public class VideoGameController {
 	
 	@PostMapping
 	public ResponseEntity<Response<VideoGameDto>> addGame(@Valid @RequestBody VideoGameDto gameDto){
+		
 		Response<VideoGameDto> response = new Response<>();
 		HttpStatus status = null;
+		
 		try {
 			response.setData(gameService.register(gameDto));
-			response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_CREATED));
+			response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_CREATED, Constants.TYPE_INFO, Constants.MSJ_ORIGIN_VIDEOGAMES));
 			status = HttpStatus.CREATED;
 		} catch (BaseException e) {
-			response.addMessage(new Message(e.getCode(), e.getMessage(), "Error", e.getOrigin()));
+			response.addMessage(new Message(e.getCode(), e.getMessage(), Constants.TYPE_ERROR, e.getOrigin()));
 			status = HttpStatus.OK;
 		}
+		
 		return new ResponseEntity<Response<VideoGameDto>>(response, status);
 	}
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Response<VideoGameDto>> editGame(@Valid @RequestBody UpdatableVideoGameDto gameDto, @PathVariable Long id) throws BaseException{
+		
 		Response<VideoGameDto> response = new Response<>();
 		HttpStatus status = null;
 		VideoGameDto updatedGameDto = null;
+		
 		try {
 			updatedGameDto = gameService.getById(id);
 		} catch (BaseException e) {
 			log.warn("Videogame with id " + id + " doesn't exists");
 		}
+		
 		if(updatedGameDto == null) {
-			response.addMessage(new Message(Constants.ERROR_CODE_ELEMENT_NOT_FOUND, Constants.MSJ_ENTRY_DOES_NOT_EXISTS, Long.toString(id) ));
+			response.addMessage(new Message(Constants.ERROR_CODE_ELEMENT_NOT_FOUND, Constants.MSJ_ENTRY_DOES_NOT_EXISTS, Constants.TYPE_ERROR, Long.toString(id) ));
 			return new ResponseEntity<Response<VideoGameDto>>(response, HttpStatus.NOT_FOUND);
 		}
+		
 		if(gameDto.getName() != null) {
 			updatedGameDto.setName(gameDto.getName());
 		}
+		
 		if(gameDto.getTypeOfGame() != null) {
 			updatedGameDto.setTypeOfGame(gameDto.getTypeOfGame());
 		}
+		
 		if(gameDto.getAvailable() != null) {
 			updatedGameDto.setAvailable(gameDto.getAvailable());
 		}
+		
 		if(gameDto.getStartRentalDate() != null) {
 			updatedGameDto.setStartRentalDate(gameDto.getStartRentalDate());
 		}
+		
 		if(gameDto.getEndRentalDate() != null) {
 			updatedGameDto.setEndRentalDate(gameDto.getEndRentalDate());
 		}
+		
 		if(gameDto.getCustomer() != null) {
 			updatedGameDto.setCustomer(gameDto.getCustomer());
 		}
+		
 		updatedGameDto = gameService.update(updatedGameDto, id);
 		response.setData(updatedGameDto);
-		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_UPDATED));
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_UPDATED, Constants.TYPE_INFO, "Videogame with id: " + id));
 		status = HttpStatus.CREATED;
+		
 		return new ResponseEntity<Response<VideoGameDto>>(response, status);
+		
 	}
 	
 	@GetMapping
 	public  ResponseEntity<Response<List<VideoGameDto>>> getGamesInventory() throws BaseException {
+		
 		List<VideoGameDto> inventory = new ArrayList<>();
 		inventory.addAll(gameService.getAll());
 		Response<List<VideoGameDto>> response = new Response<>();
+		
 		if(inventory.isEmpty()) {
 			response.setData(Collections.emptyList());
-			response.addMessage(new Message(Constants.MSJ_EMPTY_LIST));
+			response.addMessage(new Message(Constants.ERROR_CODE_ELEMENT_NOT_FOUND, Constants.MSJ_EMPTY_LIST, Constants.TYPE_ERROR, Constants.MSJ_ORIGIN_VIDEOGAMES));
 			return new ResponseEntity<Response<List<VideoGameDto>>>(response, HttpStatus.OK);
 		}
+		
 		response.setData(inventory);
+		
 		return new ResponseEntity<Response<List<VideoGameDto>>>(response, HttpStatus.OK);
+		
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Response<VideoGameDto>> getGameById(@PathVariable Long id){
+		
 		VideoGameDto gameDto = null;
+		
 		try {
 			gameDto = gameService.getById(id);
 		} catch (BaseException e) {
 			log.warn("Videogame with id " + id + " doesn't exists");
 		}
+		
 		Response<VideoGameDto> response = new Response<>();
+		
 		if(gameDto == null) {
-			response.addMessage(new Message(Constants.ERROR_CODE_ELEMENT_NOT_FOUND, Constants.MSJ_ENTRY_DOES_NOT_EXISTS, Long.toString(id) ));
+			response.addMessage(new Message(Constants.ERROR_CODE_ELEMENT_NOT_FOUND, Constants.MSJ_ENTRY_DOES_NOT_EXISTS, Constants.TYPE_ERROR, Long.toString(id) ));
 			return new ResponseEntity<Response<VideoGameDto>>(response, HttpStatus.NOT_FOUND);
 		}
+		
 		response.setData(gameDto);
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_FOUNDED, Constants.TYPE_INFO, "Videogame with id: " + id));
+		
 		return new ResponseEntity<Response<VideoGameDto>>(response, HttpStatus.OK);
 	}
 	
 	@DeleteMapping("{id}")
 	public ResponseEntity<Response<Void>> deleteGameById(@PathVariable Long id){
+		
 		Response<Void> response = new Response<>();
 		HttpStatus status = null;
+		
 		try {
 			gameService.delete(id);
-			response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_DELETED, Long.toString(id)));
+			response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_DELETED, Constants.TYPE_INFO, "Videogame with id: " + id));
 			status = HttpStatus.CREATED;
 		} catch (BaseException e) {
 			response.addMessage(new Message(e.getCode(), e.getMessage(), "Error", e.getOrigin()));
@@ -136,7 +165,9 @@ public class VideoGameController {
 				status = HttpStatus.OK;
 			}
 		}
+		
 		return new ResponseEntity<Response<Void>>(response, status);
+		
 	}
 	
 }

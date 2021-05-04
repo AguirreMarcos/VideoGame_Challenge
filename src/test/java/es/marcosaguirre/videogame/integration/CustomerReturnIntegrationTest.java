@@ -90,7 +90,7 @@ public class CustomerReturnIntegrationTest {
 
 		Response<ReturnInfoResponseDto> response = new Response<>();
 		response.setData(returnInfo);
-		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RETURN_INFO));
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RETURN_INFO, Constants.TYPE_INFO, "Customer with id: " + customerDto.getId()));
 
 		String url = "/returns/partial/" + customerDto.getId();
 		mockMvc.perform(post(url).contentType("application/json").content(objectMapper.writeValueAsString(inputDto)))
@@ -133,7 +133,7 @@ public class CustomerReturnIntegrationTest {
 
 		Response<ReturnInfoResponseDto> response = new Response<>();
 		response.setData(returnInfo);
-		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RETURN_INFO));
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RETURN_INFO, Constants.TYPE_INFO, "Customer with id: " + customerDto.getId()));
 
 		String url = "/returns/total/" + customerDto.getId();
 		mockMvc.perform(post(url).contentType("application/json")).andExpect(status().isOk())
@@ -188,7 +188,7 @@ public class CustomerReturnIntegrationTest {
 
 		Response<ConfirmedReturnResponseDto> response = new Response<>();
 		response.setData(returnInfo);
-		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RETURN_INFO));
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RETURN_INFO, Constants.TYPE_INFO, "Customer with id: " + customerDto.getId()));
 
 		String url = "/returns/partial/" + customerDto.getId() + "/confirm";
 		mockMvc.perform(post(url).contentType("application/json").content(objectMapper.writeValueAsString(inputDto)))
@@ -240,7 +240,7 @@ public class CustomerReturnIntegrationTest {
 
 		Response<ConfirmedReturnResponseDto> response = new Response<>();
 		response.setData(returnInfo);
-		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RETURN_INFO));
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RETURN_INFO, Constants.TYPE_INFO, "Customer with id: " + customerDto.getId()));
 
 		String url = "/returns/total/" + customerDto.getId() + "/confirm";
 		mockMvc.perform(post(url).contentType("application/json")).andExpect(status().isOk())

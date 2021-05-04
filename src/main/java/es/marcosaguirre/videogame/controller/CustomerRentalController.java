@@ -29,32 +29,37 @@ public class CustomerRentalController {
 	
 	@PostMapping
 	public ResponseEntity<Response<RentalInfoResponseDto>> showRentalInfoResponse(@Valid @RequestBody RentalInputDto inputDto){
+		
 		Response<RentalInfoResponseDto> response = new Response<>();
 		HttpStatus status = null;
+		
 		try {
 			response.setData(rentalService.showRentalInfo(inputDto));
-			response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RENTAL_INFO));
+			response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RENTAL_INFO, Constants.TYPE_INFO, Constants.MSJ_ORIGIN_RENTAL_INFO));
 			status = HttpStatus.OK;
 		} catch (BaseException e) {
 			response.addMessage(new Message(e.getCode(), e.getMessage(), "Error", e.getOrigin()));
 			status = HttpStatus.OK;
 		}
+		
 		return new ResponseEntity<Response<RentalInfoResponseDto>>(response, status);
 	}
 	
 	@PostMapping("{id}/confirm")
 	public ResponseEntity<Response<ConfirmedRentalResponseDto>> confirmRentalResponse(@Valid @RequestBody RentalInputDto inputDto, @PathVariable Long id){
+		
 		Response<ConfirmedRentalResponseDto> response = new Response<>();
 		HttpStatus status = null;
+		
 		try {
 			response.setData(rentalService.confirmRentalOperation(inputDto, id));
-			response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RENTAL_CONFIRMATION));
+			response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RENTAL_CONFIRMATION, Constants.TYPE_INFO, Constants.MSJ_ORIGIN_RENTAL_INFO));
 			status = HttpStatus.OK;
 		} catch (BaseException e) {
 			response.addMessage(new Message(e.getCode(), e.getMessage(), "Error", e.getOrigin()));
 			status = HttpStatus.OK;
 		}
+		
 		return new ResponseEntity<Response<ConfirmedRentalResponseDto>>(response, status);
 	}
-
 }

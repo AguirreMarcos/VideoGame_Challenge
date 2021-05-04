@@ -25,7 +25,9 @@ public class VideoGameServiceImpl implements IVideoGameService{
 
 	@Override
 	public VideoGameDto register(VideoGameDto obj) throws BaseException {
+		
 		VideoGame newVideoGame = null;
+		
 		try {
 			newVideoGame = gameRepo.save(VideoGameMapper.toVideoGameEntity(obj));
 		} catch (DataIntegrityViolationException dve) {
@@ -37,50 +39,63 @@ public class VideoGameServiceImpl implements IVideoGameService{
 			BaseException ex = new BaseException(Constants.ERROR_CODE_SERVER, Constants.MSJ_SERVER_ERROR);
 			throw ex;
 		}
+		
 		return VideoGameMapper.toVideoGameDto(newVideoGame);
 	}
 
 	@Override
 	public VideoGameDto update(VideoGameDto obj, Long id) throws BaseException {
+		
 		Optional<VideoGame> game = gameRepo.findById(id);
+		
 		if (!game.isPresent()) {
 			log.warn("Videogame with id " + id + " doesn't exists");
 			BaseException exception = new BaseException(Constants.ERROR_CODE_ELEMENT_NOT_FOUND,
 					Constants.MSJ_ENTRY_DOES_NOT_EXISTS, Long.toString(obj.getId()));
 			throw exception;
 		}
+		
 		obj.setId(id);
 		VideoGame updatedGame = gameRepo.save(VideoGameMapper.toVideoGameEntity(obj));
+		
 		return VideoGameMapper.toVideoGameDto(updatedGame);
 	}
 
 	@Override
 	public List<VideoGameDto> getAll() throws BaseException {
+		
 		return VideoGameMapper.toVideoGameDto(gameRepo.findAll());
 	}
 
 	@Override
 	public VideoGameDto getById(Long id) throws BaseException {
+		
 		Optional<VideoGame> game = gameRepo.findById(id);
+		
 		if (!game.isPresent()) {
 			log.warn("Videogame with id " + id + " doesn't exists");
 			BaseException exception = new BaseException(Constants.ERROR_CODE_ELEMENT_NOT_FOUND,
 					Constants.MSJ_ENTRY_DOES_NOT_EXISTS, Long.toString(id));
 			throw exception;
 		}
+		
 		return VideoGameMapper.toVideoGameDto(game.get());
 	}
 
 	@Override
 	public boolean delete(Long id) throws BaseException {
+		
 		Optional<VideoGame> game = gameRepo.findById(id);
+		
 		if (!game.isPresent()) {
 			log.warn("Videogame with id " + id + " doesn't exists");
 			BaseException exception = new BaseException(Constants.ERROR_CODE_ELEMENT_NOT_FOUND,
 					Constants.MSJ_ENTRY_DOES_NOT_EXISTS, Long.toString(id));
 			throw exception;
 		}
+		
 		gameRepo.deleteById(id);
+		
 		return true;
 	}
 

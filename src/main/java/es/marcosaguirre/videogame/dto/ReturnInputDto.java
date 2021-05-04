@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReturnInputDto {
+	
 	@NotNull(message = "List of gameIdentifiers can't be empty")
 	private List<Long> gameIdentifiers;
+	
 }

@@ -1,5 +1,14 @@
 package es.marcosaguirre.videogame.common;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+@Data
+@EqualsAndHashCode(callSuper = false)
+@AllArgsConstructor
+@NoArgsConstructor
 public class BaseException extends Exception{
 	
 	/**
@@ -13,33 +22,5 @@ public class BaseException extends Exception{
 	public BaseException(int code, String message) {
 		this.code = code;
 		this.message = message;
-	}
-	
-	public BaseException(int code, String message, String origin) {
-		this.code = code;
-		this.message = message;
-		this.origin = origin;
-	}
-	
-	public int getCode() {
-		return code;
-	}
-	public void setCode(int code) {
-		this.code = code;
-	}
-	public String getMessage() {
-		return message;
-	}
-	public void setMessage(String message) {
-		this.message = message;
-	}
-	public String getOrigin() {
-		return origin;
-	}
-	public void setOrigin(String origin) {
-		this.origin = origin;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 }

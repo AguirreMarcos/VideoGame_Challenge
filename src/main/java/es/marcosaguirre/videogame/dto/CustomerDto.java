@@ -19,7 +19,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CustomerDto {
 	
-
 	private Long id;
 	
 	@NotBlank(message = "Name can't be empty")

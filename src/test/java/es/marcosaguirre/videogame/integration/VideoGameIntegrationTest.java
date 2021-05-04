@@ -99,7 +99,7 @@ public class VideoGameIntegrationTest {
 
 		Response<Void> response = new Response<>();
 		response.addMessage(
-				new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_DELETED, Long.toString(createdVideoGame.getId())));
+				new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_DELETED, Constants.TYPE_INFO, "Videogame with id: " + createdVideoGame.getId()));
 
 		mockMvc.perform(delete(url)).andExpect(status().isCreated())
 				.andExpect(content().string(objectMapper.writeValueAsString(response))).andDo(print());
@@ -163,7 +163,7 @@ public class VideoGameIntegrationTest {
 
 		response.setData(listOfGames);
 
-		response.addMessage(new Message(Constants.MSJ_EMPTY_LIST));
+		response.addMessage(new Message(Constants.ERROR_CODE_ELEMENT_NOT_FOUND, Constants.MSJ_EMPTY_LIST, Constants.TYPE_ERROR, Constants.MSJ_ORIGIN_VIDEOGAMES));
 
 		String url = "/inventory";
 
@@ -174,6 +174,7 @@ public class VideoGameIntegrationTest {
 		String expectedJsonResponse = objectMapper.writeValueAsString(response);
 
 		assertThat(actualJsonResponse).isEqualToIgnoringWhitespace(expectedJsonResponse);
+		
 	}
 
 	@Test

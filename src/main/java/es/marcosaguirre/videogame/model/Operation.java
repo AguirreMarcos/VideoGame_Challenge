@@ -23,7 +23,6 @@ import lombok.NoArgsConstructor;
 @Table(name = "operations")
 public class Operation {
 	
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -47,6 +46,5 @@ public class Operation {
 		this.operationType = operationType;
 		this.totalAmount = totalAmount;
 		this.date = date;
-	}
-	
+	}	
 }

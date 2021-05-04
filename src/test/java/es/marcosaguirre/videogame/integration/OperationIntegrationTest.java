@@ -18,7 +18,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import es.marcosaguirre.videogame.common.Constants;
 import es.marcosaguirre.videogame.common.GameTypes;
+import es.marcosaguirre.videogame.common.Message;
 import es.marcosaguirre.videogame.common.OperationTypes;
 import es.marcosaguirre.videogame.common.Response;
 import es.marcosaguirre.videogame.dto.CustomerDto;
@@ -76,6 +78,7 @@ public class OperationIntegrationTest {
 		
 		Response<List<OperationDto>> response = new Response<>();
 		response.setData(operationsList);
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_LIST, Constants.TYPE_INFO, Constants.MSJ_ORIGIN_OPERATIONS));
 		
 		String url = "/operations";
 		
@@ -121,6 +124,7 @@ public class OperationIntegrationTest {
 		OperationDto expectedOperation = operationService.register(newOperation);
 		Response<OperationDto> response = new Response<>();
 		response.setData(expectedOperation);
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_FOUNDED, Constants.TYPE_INFO,"Operation with id: " + expectedOperation.getId()));
 		
 		String url = "/operations/" + expectedOperation.getId();
 		

@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OperationDto {
 	
-
 	private Long id;
 	
 	private Long customerId;
@@ -28,8 +27,5 @@ public class OperationDto {
 		this.operationType = operationType;
 		this.totalAmount = totalAmount;
 		this.date = date;
-	}
-	
-	
-	
+	}	
 }

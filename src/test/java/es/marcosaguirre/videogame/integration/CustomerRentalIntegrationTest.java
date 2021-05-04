@@ -76,7 +76,7 @@ public class CustomerRentalIntegrationTest {
 
 		Response<RentalInfoResponseDto> response = new Response<>();
 		response.setData(rentalResponse);
-		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RENTAL_INFO));
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RENTAL_INFO, Constants.TYPE_INFO, Constants.MSJ_ORIGIN_RENTAL_INFO));
 
 		String url = "/rentals";
 		mockMvc.perform(post(url).contentType("application/json").content(objectMapper.writeValueAsString(inputDto)))
@@ -125,7 +125,7 @@ public class CustomerRentalIntegrationTest {
 
 		Response<ConfirmedRentalResponseDto> response = new Response<>();
 		response.setData(confirmedRentalResponse);
-		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RENTAL_CONFIRMATION));
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_RENTAL_CONFIRMATION, Constants.TYPE_INFO, Constants.MSJ_ORIGIN_RENTAL_INFO));
 
 		String url = "/rentals/" + dbCustomer.getId() + "/confirm";
 		mockMvc.perform(post(url).contentType("application/json").content(objectMapper.writeValueAsString(inputDto)))

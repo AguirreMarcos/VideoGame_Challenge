@@ -56,6 +56,8 @@ public class CustomerControllerTest {
 		
 		response.setData(listCustomersDto);
 		
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_LIST, Constants.TYPE_INFO, "Customers List"));
+		
 		Mockito.when(customerService.getAll()).thenReturn(listCustomersDto);
 		
 		String url = "/customers";
@@ -82,7 +84,7 @@ public class CustomerControllerTest {
 		
 		response.setData(listOfCustomers);
 		
-		response.addMessage(new Message(Constants.MSJ_EMPTY_LIST));
+		response.addMessage(new Message(Constants.ERROR_CODE_ELEMENT_NOT_FOUND,Constants.MSJ_EMPTY_LIST, Constants.TYPE_ERROR, "Customers List"));
 		
 		Mockito.when(customerService.getAll()).thenReturn(listOfCustomers);
 		
@@ -104,7 +106,7 @@ public class CustomerControllerTest {
 		CustomerDto savedCustomer = new CustomerDto(1L, "Marcos", "Aguirre", "maguirreminarro@gmail.com", 14, null);
 		Response<CustomerDto> response = new Response<>();
 		response.setData(savedCustomer);
-		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_CREATED));
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_CREATED, "INFO", "Customer"));
 		Mockito.when(customerService.register(newCustomer)).thenReturn(savedCustomer);
 		
 		String url = "/customers";
@@ -127,7 +129,7 @@ public class CustomerControllerTest {
 		
 		Response<CustomerDto> response = new Response<>();
 		response.setData(updatedCustomer);
-		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_UPDATED));
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_UPDATED, Constants.TYPE_INFO, "Customer with id; " + existingCustomerId));
 		
 		Mockito.when(customerService.getById(existingCustomerId)).thenReturn(existingCustomer);
 		
@@ -150,7 +152,7 @@ public class CustomerControllerTest {
 		String url = "/customers/" + customerId;
 		
 		Response<Void> response = new Response<>();
-		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_DELETED, Long.toString(customerId)));
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_DELETED, Constants.TYPE_INFO, "Customer with id: " + customerId));
 		
 		Mockito.when(customerService.delete(customerId)).thenReturn(true);
 		

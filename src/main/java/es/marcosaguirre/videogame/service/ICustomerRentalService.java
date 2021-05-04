@@ -6,6 +6,8 @@ import es.marcosaguirre.videogame.dto.RentalInfoResponseDto;
 import es.marcosaguirre.videogame.dto.RentalInputDto;
 
 public interface ICustomerRentalService {
+	
 	public RentalInfoResponseDto showRentalInfo(RentalInputDto inputDto) throws BaseException;
+	
 	public ConfirmedRentalResponseDto confirmRentalOperation(RentalInputDto inputDto, Long customerId) throws BaseException;
 }

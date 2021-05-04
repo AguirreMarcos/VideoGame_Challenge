@@ -66,8 +66,5 @@ public class VideoGameDto {
 		this.startRentalDate = startRentalDate;
 		this.endRentalDate = endRentalDate;
 		this.customer = customer;
-	}
-	
-	
-	
+	}	
 }

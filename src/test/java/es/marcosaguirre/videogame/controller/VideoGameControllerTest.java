@@ -83,7 +83,7 @@ public class VideoGameControllerTest {
 		
 		response.setData(listOfGames);
 		
-		response.addMessage(new Message(Constants.MSJ_EMPTY_LIST));
+		response.addMessage(new Message(Constants.ERROR_CODE_ELEMENT_NOT_FOUND, Constants.MSJ_EMPTY_LIST, Constants.TYPE_ERROR, Constants.MSJ_ORIGIN_VIDEOGAMES));
 		
 		Mockito.when(gameService.getAll()).thenReturn(listOfGames);
 		
@@ -105,7 +105,7 @@ public class VideoGameControllerTest {
 		VideoGameDto savedVideoGame = new VideoGameDto(1L, "first game name", GameTypes.NEW_RELEASE);
 		Response<VideoGameDto> response = new Response<>();
 		response.setData(savedVideoGame);
-		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_CREATED));
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_CREATED, Constants.TYPE_INFO, Constants.MSJ_ORIGIN_VIDEOGAMES));
 		Mockito.when(gameService.register(newVideoGame)).thenReturn(savedVideoGame);
 		
 		String url = "/inventory";
@@ -127,7 +127,7 @@ public class VideoGameControllerTest {
 		
 		Response<VideoGameDto> response = new Response<>();
 		response.setData(updatedVideoGame);
-		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_UPDATED));
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_UPDATED, Constants.TYPE_INFO, "Videogame with id: " + existingVideoGameId));
 		
 		Mockito.when(gameService.getById(existingVideoGameId)).thenReturn(existingVideoGame);
 		
@@ -150,7 +150,7 @@ public class VideoGameControllerTest {
 		String url = "/inventory/" + videoGameId;
 		
 		Response<Void> response = new Response<>();
-		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_DELETED, Long.toString(videoGameId)));
+		response.addMessage(new Message(Constants.CODE_OK, Constants.MSJ_ENTRY_DELETED, Constants.TYPE_INFO, "Videogame with id: " + videoGameId));
 		
 		Mockito.when(gameService.delete(videoGameId)).thenReturn(true);
 		
