@@ -24,10 +24,15 @@ En el caso de la devolución existen cuatro endpoints, ya que se permite igualme
 **El proyecto está creado usando una base de datos en memoria (H2) y se ha creado un fichero sql que realiza el insert de un cliente y de varios videojuegos de prueba.**
 ### Customers
 **Crud de clientes** <br>
+
 **GET /customers** : Devuelve el listado de clientes<br>
+
 **POST /customers** : Crea un nuevo cliente (Paso de parametros en el cuerpo, detalles de la entrada y salida de datos en SWAGGER)<br>
+
 **GET /customers/{id}** : Devuelve el cliente con el id de la URL<br>
+
 **PUT /customers/{id}** : Actualiza el cliente (Permite actualizar uno o varios parámetros, detalles de la entrada y salida de datos en SWAGGER)<br>
+
 **DELETE /customers/{id}** : Elimina el cliente<br>
 
 ### VideoGames
