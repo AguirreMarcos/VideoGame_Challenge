@@ -51,24 +51,25 @@ public class CustomerRentalIntegrationTest {
 	@Test
 	public void showRentalInfoResponseTest() throws JsonProcessingException, Exception {
 		
+		// DB
+		VideoGameDto first = gameService.register(new VideoGameDto("first", GameTypes.NEW_RELEASE));
+		VideoGameDto second = gameService.register(new VideoGameDto("second", GameTypes.CLASSIC));
+			
 		// input
 
 		List<Long> gameIdentifiers = new ArrayList<>();
-		gameIdentifiers.add(1L);
-		gameIdentifiers.add(2L);
+		gameIdentifiers.add(first.getId());
+		gameIdentifiers.add(second.getId());
 		Integer daysOfRental = 7;
 		RentalInputDto inputDto = new RentalInputDto(gameIdentifiers, daysOfRental);
 
 		// output
 
-		VideoGameDto firstGame = new VideoGameDto(1L, "first", GameTypes.NEW_RELEASE);
-		VideoGameDto secondGame = new VideoGameDto(2L, "second", GameTypes.CLASSIC);
+		VideoGameDto firstGame = new VideoGameDto(first.getId(), "first", GameTypes.NEW_RELEASE);
+		VideoGameDto secondGame = new VideoGameDto(second.getId(), "second", GameTypes.CLASSIC);
 		List<VideoGameDto> responseGamesList = new ArrayList<>();
 		responseGamesList.add(firstGame);
 		responseGamesList.add(secondGame);
-		for(VideoGameDto game: responseGamesList) {
-			gameService.register(game);
-		}
 		Double totalPrice = 37.0;
 		Integer loyaltyPoints = 3;
 		RentalInfoResponseDto rentalResponse = new RentalInfoResponseDto(responseGamesList, loyaltyPoints, totalPrice);
