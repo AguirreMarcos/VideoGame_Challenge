@@ -1,7 +1,7 @@
 # VideoGame_Challenge
 Prueba técnica realizada por **Marcos Aguirre Miñarro** 
 
-##Documentación
+## Documentación
 Se añade como parte del proyecto la inclusión de swagger para facilitar la consulta y prueba de todos los endpoints del API.
 
 Para levantar la aplicación simplemente se puede clonar el proyecto y ejecutarla como Spring Boot Application.
