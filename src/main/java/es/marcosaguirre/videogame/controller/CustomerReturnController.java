@@ -28,7 +28,7 @@ public class CustomerReturnController {
 	private ICustomerReturnService returnService;
 	
 	@PostMapping("/partial/{id}")
-	public ResponseEntity<Response<ReturnInfoResponseDto>> showReturnInfoResponse(@Valid @RequestBody ReturnInputDto inputDto, @PathVariable Long id){
+	public ResponseEntity<Response<ReturnInfoResponseDto>> showPartialReturnInfoResponse(@Valid @RequestBody ReturnInputDto inputDto, @PathVariable Long id){
 		Response<ReturnInfoResponseDto> response = new Response<>();
 		HttpStatus status = null;
 		try {
@@ -44,7 +44,7 @@ public class CustomerReturnController {
 	}
 	
 	@PostMapping("/total/{id}")
-	public ResponseEntity<Response<ReturnInfoResponseDto>> showTotalInfoResponse(@PathVariable Long id){
+	public ResponseEntity<Response<ReturnInfoResponseDto>> showTotalReturnInfoResponse(@PathVariable Long id){
 		Response<ReturnInfoResponseDto> response = new Response<>();
 		HttpStatus status = null;
 		try {
