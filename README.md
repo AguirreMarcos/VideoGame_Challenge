@@ -22,9 +22,20 @@ En el caso de la devolución existen cuatro endpoints, ya que se permite igualme
 ## EndPoints
 
 ### Customers
-GET /customers : Devuelve el listado de clientes<br>  
-POST /customers : Crea un nuevo cliente (Paso de parametros en el cuerpo, detalles de la entrada y salida de datos en SWAGGER)  
-GET /customers/{id} : Devuelve el cliente con el id de la URL  
-PUT /customers/{id} : Actualiza el cliente (Paso de parametros en el cuerpo, detalles de la entrada y salida de datos en SWAGGER)
-DELETE /customers/{id} : Elimina el cliente
+**Crud de clientes**
+GET /customers : Devuelve el listado de clientes<br>
+POST /customers : Crea un nuevo cliente (Paso de parametros en el cuerpo, detalles de la entrada y salida de datos en SWAGGER)<br>
+GET /customers/{id} : Devuelve el cliente con el id de la URL<br>
+PUT /customers/{id} : Actualiza el cliente (Permite actualizar uno o varios parámetros, detalles de la entrada y salida de datos en SWAGGER)<br>
+DELETE /customers/{id} : Elimina el cliente<br>
+
+### VideoGames
+**Crud de videojuegos**
+GET /inventory : Devuelve el listado de juegos
+POST /inventory : Crea un nuevo juego (Paso de parametros en el cuerpo, detalles de la entrada y salida de datos en SWAGGER)<br>
+GET /inventory/{id} : Devuelve el juego indicado por id <br>
+PUT /inventory/{id} : Actualiza el juego (Permite actualizar uno o varios parámetros, detalles de la entrada y salida de datos en SWAGGER)<br>
+DELETE /inventory : Elimina el juego <br>
+
+###
 
