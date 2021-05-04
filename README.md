@@ -50,4 +50,10 @@ En esta ruta se realizan las operaciones relacionadas con los alquileres.<br>
 POST /rentals : en esta ruta se pasa en el cuerpo un array de id's de videojuegos por un lado y el número de días de alquiler por otro y el sistema responde con los datos de importe total, puntos potenciales acumulables y los juegos alquilados. <br>
 POST /rentals/{id}/confirm : Esta ruta recibe la misma entrada que la anterior pero persiste la operación en los datos de cliente, de los juegos afectados y genera un registro en la tabla de operaciones. <br>
 
-
+### Returns
+**Operaciones de devolución de juegos**
+En esta ruta se realizan las operaciones de devolución
+POST /returns/partial/{id} : En esta ruta se informa de la devolución pero sin persistir la información. Se pasan en el cuerpo de la función los juegos que se quiere devolver de entre los que el cliente tiene alquilados. <br>
+POST /returns/partial/{id}/confirm : Esta ruta es análoga a la anterior pero confirma la devolución y actualiza los estados de los juegos, del cliente y genera un registro en la tabla de operaciones. <br>
+POST /returns/total/{id} : En esta ruta se informa de la devolución pero sin persistir la información. No recibe datos en el cuerpo ya que se asume que se usa esta ruta cuando el cliente quiere realizar la devolución completa. <br>
+POST /returns/total/{id}/confirm : Esta ruta es análoga a la anterior pero pero confirma la devolución y actualiza los estados de los juegos, del cliente y genera un registro en la tabla de operaciones. <br> 
