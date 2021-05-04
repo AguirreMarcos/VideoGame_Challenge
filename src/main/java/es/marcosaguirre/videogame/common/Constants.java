@@ -29,7 +29,7 @@ public class Constants {
 	public static final String MSJ_ENTRY_UPDATED = "The entity has been updated";
 	public static final String MSJ_GAME_NOT_AVAILABLE = "The game is not available for rent";
 	public static final String MSJ_GAME_NOT_RENTED= "The game is not rented by this customer in this moment";
-	public static final String MSJ_ORIGIN_RENTAL_INFO= "Rental origine";
+	public static final String MSJ_ORIGIN_RENTAL_INFO= "Rental origin";
 	public static final String MSJ_ORIGIN_RETURN_INFO= "Return origin";
 	public static final String MSJ_ORIGIN_OPERATIONS= "Operations origin";
 	public static final String MSJ_ORIGIN_VIDEOGAMES= "Videogames origin";
