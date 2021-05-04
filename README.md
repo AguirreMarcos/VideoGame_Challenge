@@ -4,7 +4,7 @@ Prueba técnica realizada por **Marcos Aguirre Miñarro**
 ## Documentación
 Se añade como parte del proyecto la inclusión de swagger para facilitar la consulta y prueba de todos los endpoints del API.
 
-Para levantar la aplicación simplemente se puede clonar el proyecto y ejecutarlo como Spring Boot Application. La aplicación levanta en local en el puerto por defecto, por lo que la url de la documentación de swagger es <a href="http://localhost:8080/swagger-ui.htm" target="_blank">http://localhost:8080/swagger-ui.htm</a>
+Para levantar la aplicación simplemente se puede clonar el proyecto y ejecutarlo como Spring Boot Application. La aplicación levanta en local en el puerto por defecto, por lo que la url de la documentación de swagger es <a href="http://localhost:8080/swagger-ui.html" target="_blank">http://localhost:8080/swagger-ui.html</a>
 
 
 
